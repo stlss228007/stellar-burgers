@@ -1,26 +1,29 @@
-import { Preloader, OrderInfoUI } from '@ui';
-import { useMemo } from 'react';
+import {
+  selectIngredients,
+  selectOrderByNumber,
+  selectOrderByNumberLoading,
+} from '@selectors';
+import { fetchOrderByNumber } from '@services/slices/order-slice';
+import { useDispatch, useSelector } from '@services/store';
+import { OrderInfoUI, Preloader } from '@ui';
+import { useEffect, useMemo } from 'react';
+import { useParams } from 'react-router-dom';
 
 import type { TIngredient } from '@utils-types';
 
 export const OrderInfo = (): React.JSX.Element => {
-  /** TODO: взять переменные orderData и ingredients из стора */
-  const orderData = {
-    createdAt: '',
-    ingredients: [],
-    _id: '',
-    status: '',
-    name: '',
-    updatedAt: 'string',
-    number: 0,
-  };
+  const { number } = useParams<{ number: string }>();
+  const dispatch = useDispatch();
 
-  const ingredients: TIngredient[] = [];
+  const orderData = useSelector(selectOrderByNumber);
+  const isLoading = useSelector(selectOrderByNumberLoading);
+  const ingredients = useSelector(selectIngredients);
 
-  /**
-   * использование useMemo не обязательно
-   */
-  /* Готовим данные для отображения */
+  useEffect(() => {
+    if (!number) return;
+    void dispatch(fetchOrderByNumber(Number(number)));
+  }, [dispatch, number]);
+
   const orderInfo = useMemo(() => {
     if (!orderData || !ingredients.length) return null;
 
@@ -33,10 +36,7 @@ export const OrderInfo = (): React.JSX.Element => {
         if (!acc[item]) {
           const ingredient = ingredients.find((ing) => ing._id === item);
           if (ingredient) {
-            acc[item] = {
-              ...ingredient,
-              count: 1,
-            };
+            acc[item] = { ...ingredient, count: 1 };
           }
         } else {
           acc[item].count++;
@@ -60,7 +60,7 @@ export const OrderInfo = (): React.JSX.Element => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (isLoading || !orderInfo) {
     return <Preloader />;
   }
 

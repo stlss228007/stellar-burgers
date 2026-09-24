@@ -6,7 +6,8 @@ import type { OrdersListProps } from './type';
 export const OrdersList = memo(function OrdersList({
   orders,
 }: OrdersListProps): React.JSX.Element {
-  const orderByDate = [...orders].sort(
+  const safeOrders = orders ?? [];
+  const orderByDate = [...safeOrders].sort(
     (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
   );
 

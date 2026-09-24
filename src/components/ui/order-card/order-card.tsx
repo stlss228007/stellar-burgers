@@ -3,8 +3,9 @@ import {
   CurrencyIcon,
   FormattedDate,
 } from '@krgaa/react-developer-burger-ui-components';
+import { clsx } from 'clsx';
 import { memo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import type { OrderCardUIProps } from './type';
 
@@ -15,12 +16,15 @@ export const OrderCardUI = memo(function OrderCardUI({
   maxIngredients,
   locationState,
 }: OrderCardUIProps): React.JSX.Element {
+  const { pathname } = useLocation();
+  const isProfileOrders = pathname.startsWith('/profile/orders');
+
   return (
     <Link
       to={orderInfo.number.toString()}
       relative="path"
       state={locationState}
-      className={`p-6 mb-4 mr-2 ${styles.order}`}
+      className={clsx('p-6', 'mb-4', 'mr-2', styles.order)}
     >
       <div className={styles.order_info}>
         <span className="text text_type_digits-default">
@@ -30,43 +34,42 @@ export const OrderCardUI = memo(function OrderCardUI({
           <FormattedDate date={orderInfo.date} />
         </span>
       </div>
-      <h4 className={`pt-6 text text_type_main-medium ${styles.order_name}`}>
+      <h4 className={clsx('pt-6', 'text', 'text_type_main-medium', styles.order_name)}>
         {orderInfo.name}
       </h4>
-      {location.pathname === '/profile/orders' && (
-        <OrderStatus status={orderInfo.status} />
-      )}
-      <div className={`pt-6 ${styles.order_content}`}>
+      {isProfileOrders && <OrderStatus status={orderInfo.status} />}
+      <div className={clsx('pt-6', styles.order_content)}>
         <ul className={styles.ingredients}>
           {orderInfo.ingredientsToShow.map((ingredient, index) => {
             const zIndex = maxIngredients - index;
             const right = 20 * index;
+            const isLast = maxIngredients === index + 1;
+
             return (
               <li
                 className={styles.img_wrap}
-                style={{ zIndex: zIndex, right: right }}
-                key={index}
+                style={{ zIndex, right }}
+                key={`${ingredient._id}-${index}`}
               >
                 <img
-                  style={{
-                    opacity:
-                      orderInfo.remains && maxIngredients === index + 1 ? '0.5' : '1',
-                  }}
+                  style={{ opacity: orderInfo.remains && isLast ? '0.5' : '1' }}
                   className={styles.img}
                   src={ingredient.image_mobile}
                   alt={ingredient.name}
                 />
-                {maxIngredients === index + 1 ? (
-                  <span className={`text text_type_digits-default ${styles.remains}`}>
+                {isLast && (
+                  <span className={clsx('text', 'text_type_digits-default', styles.remains)}>
                     {orderInfo.remains > 0 ? `+${orderInfo.remains}` : null}
                   </span>
-                ) : null}
+                )}
               </li>
             );
           })}
         </ul>
         <div>
-          <span className={`text text_type_digits-default pr-1 ${styles.order_total}`}>
+          <span
+            className={clsx('text', 'text_type_digits-default', 'pr-1', styles.order_total)}
+          >
             {orderInfo.total}
           </span>
           <CurrencyIcon type="primary" />

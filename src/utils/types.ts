@@ -48,6 +48,6 @@ export type TFeedState = {
   orders: TOrder[];
   total: number;
   totalToday: number;
-  isLoading: boolean;
-  error: unknown;
+  isConnected: boolean;
+  error: string | null;
 };
