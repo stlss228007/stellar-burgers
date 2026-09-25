@@ -4,12 +4,12 @@ import {
   selectOrderRequest,
   selectUser,
 } from '@selectors';
-import { createOrder, closeOrderModal } from '@services/slices/order-slice';
-import { clearConstructor } from '@services/slices/burger-constructor-slice';
-import { useDispatch, useSelector } from '@services/store';
 import { BurgerConstructorUI } from '@ui';
 import { useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { closeOrderModal, createOrder } from '@services/slices/order-slice';
+import { useDispatch, useSelector } from '@services/store';
 
 import type { TConstructorIngredient } from '@utils-types';
 
@@ -41,7 +41,6 @@ export const BurgerConstructor = (): React.JSX.Element => {
 
   const closeOrderModalHandler = useCallback((): void => {
     dispatch(closeOrderModal());
-    dispatch(clearConstructor());
   }, [dispatch]);
 
   const price = useMemo(

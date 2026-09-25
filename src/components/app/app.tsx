@@ -9,49 +9,31 @@ import {
   ConstructorPage,
   Feed,
   ForgotPassword,
+  IngredientDetailsPage,
   Login,
   NotFound404,
+  OrderInfoPage,
   Profile,
   ProfileOrders,
   Register,
   ResetPassword,
 } from '@pages';
+import { useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
+import { useTypedLocation } from '@hooks/useTypedLocation';
 import { fetchIngredients } from '@services/slices/ingredients-slice';
 import { getUser } from '@services/slices/user-slice';
 import { useDispatch } from '@services/store';
-import { useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import '../../index.css';
 
 import styles from './app.module.css';
 
-const IngredientDetailsPage = (): React.JSX.Element => (
-  <div className={styles.detailPageWrap}>
-    <p className={`text text_type_main-large mb-10 ${styles.detailHeader}`}>
-      Детали ингредиента
-    </p>
-    <IngredientDetails />
-  </div>
-);
-
-const OrderInfoPage = (): React.JSX.Element => {
-  const { number } = useParams<{ number: string }>();
-
-  return (
-    <div className={styles.detailPageWrap}>
-      <p className={`text text_type_digits-default mb-10 ${styles.detailHeader}`}>
-        #{number}
-      </p>
-      <OrderInfo />
-    </div>
-  );
-};
-
 const App = (): React.JSX.Element => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useTypedLocation();
   const background = location.state?.background;
 
   useEffect(() => {
@@ -60,7 +42,7 @@ const App = (): React.JSX.Element => {
   }, [dispatch]);
 
   const handleCloseModal = (): void => {
-    navigate(-1);
+    void navigate(-1);
   };
 
   return (

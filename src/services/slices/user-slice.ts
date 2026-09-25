@@ -1,5 +1,3 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import {
   forgotPasswordApi,
   getUserApi,
@@ -9,6 +7,8 @@ import {
   resetPasswordApi,
   updateUserApi,
 } from '@api';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+
 import { deleteCookie, getCookie, setCookie } from '@utils/cookie';
 
 import type { TLoginData, TRegisterData } from '@api';
@@ -85,12 +85,12 @@ export const forgotPassword = createAsyncThunk<void, { email: string }>(
   }
 );
 
-export const resetPassword = createAsyncThunk<
-  void,
-  { password: string; token: string }
->('user/resetPassword', async (data) => {
-  await resetPasswordApi(data);
-});
+export const resetPassword = createAsyncThunk<void, { password: string; token: string }>(
+  'user/resetPassword',
+  async (data) => {
+    await resetPasswordApi(data);
+  }
+);
 
 export const userSlice = createSlice({
   name: 'user',

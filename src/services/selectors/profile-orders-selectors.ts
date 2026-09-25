@@ -1,5 +1,5 @@
-import type { RootState } from '@services/store';
 import type { TProfileOrdersState } from '@services/slices/profile-orders-slice';
+import type { RootState } from '@services/store';
 import type { TOrder } from '@utils-types';
 
 export const selectProfileOrders = (state: RootState): TProfileOrdersState =>

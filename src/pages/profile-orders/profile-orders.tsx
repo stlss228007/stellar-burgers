@@ -1,13 +1,14 @@
 import { selectProfileOrdersList } from '@selectors';
+import { ProfileOrdersUI } from '@ui-pages';
+import { useEffect } from 'react';
+
 import {
   profileOrdersWsConnect,
   profileOrdersWsDisconnect,
 } from '@services/slices/profile-orders-slice';
 import { useDispatch, useSelector } from '@services/store';
-import { ProfileOrdersUI } from '@ui-pages';
 import { getCookie } from '@utils/cookie';
 import { WS_PROFILE_ORDERS_URL } from '@utils/ws-urls';
-import { useEffect } from 'react';
 
 export const ProfileOrders = (): React.JSX.Element => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ export const ProfileOrders = (): React.JSX.Element => {
     const token = accessToken?.replace('Bearer ', '') ?? '';
     dispatch(profileOrdersWsConnect(`${WS_PROFILE_ORDERS_URL}?token=${token}`));
 
-    return () => {
+    return (): void => {
       dispatch(profileOrdersWsDisconnect());
     };
   }, [dispatch]);

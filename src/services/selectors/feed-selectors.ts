@@ -7,5 +7,4 @@ export const selectFeedOrders = (state: RootState): TOrder[] => state.feed.order
 
 export const selectFeedTotal = (state: RootState): number => state.feed.total;
 
-export const selectFeedTotalToday = (state: RootState): number =>
-  state.feed.totalToday;
+export const selectFeedTotalToday = (state: RootState): number => state.feed.totalToday;

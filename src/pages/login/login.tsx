@@ -1,16 +1,18 @@
-import { loginUser } from '@services/slices/user-slice';
-import { useDispatch, useSelector } from '@services/store';
 import { selectUserError } from '@selectors';
 import { LoginUI } from '@ui-pages';
 import { type SyntheticEvent, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import { useTypedLocation } from '@hooks/useTypedLocation';
+import { loginUser } from '@services/slices/user-slice';
+import { useDispatch, useSelector } from '@services/store';
 
 export const Login = (): React.JSX.Element => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  const location = useTypedLocation();
   const errorText = useSelector(selectUserError);
 
   const from = location.state?.from?.pathname ?? '/';
@@ -19,10 +21,8 @@ export const Login = (): React.JSX.Element => {
     e.preventDefault();
     void dispatch(loginUser({ email, password }))
       .unwrap()
-      .then(() => {
-        void navigate(from, { replace: true });
-      })
-      .catch(() => {});
+      .then(() => navigate(from, { replace: true }))
+      .catch(() => undefined);
   };
 
   return (

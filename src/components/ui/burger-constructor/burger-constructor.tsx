@@ -81,7 +81,7 @@ export const BurgerConstructorUI = ({
         Оформить заказ
       </Button>
     </div>
-    
+
     {orderRequest && (
       <Modal onClose={closeOrderModal} title={'Оформляем заказ...'}>
         <Preloader />

@@ -18,9 +18,7 @@ export const AppHeaderUI = ({ userName }: TAppHeaderUIProps): React.JSX.Element 
         <NavLink
           to="/"
           end
-          className={({ isActive }) =>
-            clsx(styles.link, isActive && styles.link_active)
-          }
+          className={({ isActive }) => clsx(styles.link, isActive && styles.link_active)}
         >
           {({ isActive }) => (
             <>
@@ -31,9 +29,7 @@ export const AppHeaderUI = ({ userName }: TAppHeaderUIProps): React.JSX.Element 
         </NavLink>
         <NavLink
           to="/feed"
-          className={({ isActive }) =>
-            clsx(styles.link, isActive && styles.link_active)
-          }
+          className={({ isActive }) => clsx(styles.link, isActive && styles.link_active)}
         >
           {({ isActive }) => (
             <>

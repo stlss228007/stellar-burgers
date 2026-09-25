@@ -20,20 +20,6 @@
   text-align: right;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-}
-
-.question {
-  color: #8585ad;
-}
-
-.link {
-  color: #4c4cff;
-  text-decoration: none;
-}
-
 .error {
   color: #f00;
   text-align: center;

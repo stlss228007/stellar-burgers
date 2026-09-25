@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import { getOrderByNumberApi, orderBurgerApi } from '@api';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { TOrder } from '@utils-types';
@@ -65,13 +64,10 @@ export const orderSlice = createSlice({
       .addCase(fetchOrderByNumber.pending, (state) => {
         state.isOrderByNumberLoading = true;
       })
-      .addCase(
-        fetchOrderByNumber.fulfilled,
-        (state, action: PayloadAction<TOrder>) => {
-          state.isOrderByNumberLoading = false;
-          state.orderByNumber = action.payload;
-        }
-      )
+      .addCase(fetchOrderByNumber.fulfilled, (state, action: PayloadAction<TOrder>) => {
+        state.isOrderByNumberLoading = false;
+        state.orderByNumber = action.payload;
+      })
       .addCase(fetchOrderByNumber.rejected, (state) => {
         state.isOrderByNumberLoading = false;
       });

@@ -58,7 +58,9 @@ export const OrderCardUI = memo(function OrderCardUI({
                   alt={ingredient.name}
                 />
                 {isLast && (
-                  <span className={clsx('text', 'text_type_digits-default', styles.remains)}>
+                  <span
+                    className={clsx('text', 'text_type_digits-default', styles.remains)}
+                  >
                     {orderInfo.remains > 0 ? `+${orderInfo.remains}` : null}
                   </span>
                 )}
@@ -68,7 +70,12 @@ export const OrderCardUI = memo(function OrderCardUI({
         </ul>
         <div>
           <span
-            className={clsx('text', 'text_type_digits-default', 'pr-1', styles.order_total)}
+            className={clsx(
+              'text',
+              'text_type_digits-default',
+              'pr-1',
+              styles.order_total
+            )}
           >
             {orderInfo.total}
           </span>

@@ -1,12 +1,8 @@
 import type { RootState } from '@services/store';
-import type {
-  TConstructorIngredient,
-  TConstructorState,
-} from '@utils-types';
+import type { TConstructorIngredient, TConstructorState } from '@utils-types';
 
-export const selectConstructorBun = (
-  state: RootState
-): TConstructorIngredient | null => state.burgerConstructor.bun;
+export const selectConstructorBun = (state: RootState): TConstructorIngredient | null =>
+  state.burgerConstructor.bun;
 
 export const selectConstructorIngredients = (
   state: RootState

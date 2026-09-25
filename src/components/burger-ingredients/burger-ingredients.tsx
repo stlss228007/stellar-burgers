@@ -1,8 +1,9 @@
 import { selectIngredients } from '@selectors';
-import { useSelector } from '@services/store';
 import { BurgerIngredientsUI } from '@ui';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import { useSelector } from '@services/store';
 
 import type { TIngredient, TTabMode } from '@utils-types';
 

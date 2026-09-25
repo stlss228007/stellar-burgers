@@ -19,11 +19,6 @@
   list-style: none;
 }
 
-.title {
-  margin: 0;
-  text-align: left;
-}
-
 .list_item {
   min-width: 50%;
   text-align: left;

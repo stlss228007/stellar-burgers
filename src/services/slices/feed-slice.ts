@@ -1,6 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
 import { getFeedsApi } from '@api';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { TFeedState, TOrder } from '@utils-types';

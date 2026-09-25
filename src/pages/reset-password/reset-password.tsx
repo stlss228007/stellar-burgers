@@ -1,9 +1,10 @@
 import { selectUserError } from '@selectors';
-import { resetPassword } from '@services/slices/user-slice';
-import { useDispatch, useSelector } from '@services/store';
 import { ResetPasswordUI } from '@ui-pages';
 import { type SyntheticEvent, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { resetPassword } from '@services/slices/user-slice';
+import { useDispatch, useSelector } from '@services/store';
 
 export const ResetPassword = (): React.JSX.Element => {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export const ResetPassword = (): React.JSX.Element => {
         localStorage.removeItem('resetPassword');
         void navigate('/login', { replace: true });
       })
-      .catch(() => {});
+      .catch(() => undefined);
   };
 
   return (

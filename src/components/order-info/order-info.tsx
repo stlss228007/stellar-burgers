@@ -3,11 +3,12 @@ import {
   selectOrderByNumber,
   selectOrderByNumberLoading,
 } from '@selectors';
-import { fetchOrderByNumber } from '@services/slices/order-slice';
-import { useDispatch, useSelector } from '@services/store';
 import { OrderInfoUI, Preloader } from '@ui';
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+
+import { fetchOrderByNumber } from '@services/slices/order-slice';
+import { useDispatch, useSelector } from '@services/store';
 
 import type { TIngredient } from '@utils-types';
 

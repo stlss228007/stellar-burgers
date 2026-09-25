@@ -1,7 +1,8 @@
 import { selectConstructorItems } from '@selectors';
-import { useSelector } from '@services/store';
 import { IngredientsCategoryUI } from '@ui';
 import { useMemo } from 'react';
+
+import { useSelector } from '@services/store';
 
 import type { TIngredientsCategoryProps } from './type';
 import type { TIngredient } from '@utils-types';
